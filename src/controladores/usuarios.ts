@@ -38,3 +38,11 @@ export const cadastrarUsuario = async (req: Request, res: Response): Promise<any
         return res.status(500).json({mensagem: "Erro interno do servidor."})
     }
 }
+
+export const listarUsuarios = async (req: Request, res: Response): Promise<any> => {
+    try {
+        return res.status(200).json(arrayUsuario)
+    } catch (error) {
+        return res.status(500).json({mensagem: "Erro interno do servidor."})
+    }
+}

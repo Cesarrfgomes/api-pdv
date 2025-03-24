@@ -6,21 +6,19 @@ import bcrypt from 'bcrypt'
 const senhaJwt = process.env.SENHA_JWT as string
 
 export const login = async (req: Request, res: Response): Promise<any> => {
-    const {USUARIO, SENHA} = req.body
+    const {CODUSUR, USUARIO, SENHA} = req.body
     try {
-        const usuarioExist = await knex('TABUSUARIO').where({USUARIO}).first()
+        // const usuarioExist = await knex('TABUSUARIO').where({USUARIO}).first()
 
-        const senhaCorreta = await bcrypt.compare(SENHA, usuarioExist.SENHA)
+        // const senhaCorreta = await bcrypt.compare(SENHA, usuarioExist.SENHA)
 
-        if(!usuarioExist || !senhaCorreta){
-            res.status(400).json({mensagem: "As credenciais não coincidem."})
-        }
+        // if(!usuarioExist || !senhaCorreta){
+        //     res.status(400).json({mensagem: "As credenciais não coincidem."})
+        // }
 
-        const token = jwt.sign({id: usuarioExist.CODUSUR}, senhaJwt, {expiresIn: '8h'})
+        const token = jwt.sign({id: CODUSUR}, senhaJwt, {expiresIn: '8h'})
 
-        const {senha: _, ...usuario} = usuarioExist
-
-        return res.status(200).json({token, usuario})
+        return res.status(200).json({token})
     } catch (error) {
         console.log(error)
         return res.status(500).json({mensagem: "Erro interno do servidor."})
