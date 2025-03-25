@@ -9,16 +9,16 @@ import { cadastrarProduto, listarProduto } from './controladores/produto'
 
 const rotas = Router()
 
+rotas.post('/login', login)
+
+rotas.use(validarToken)
+
 rotas.post('/usuario', cadastrarUsuario)
 rotas.get('/usuario', listarUsuarios)
 
-rotas.post('/login', login)
-
-// rotas.use(validarToken)
-
 rotas.post('/cliente', cadastrarCliente)
 rotas.get('/cliente', listarClientes)
-rotas.patch('/cliente/:CODCLI', bloquearCliente)
+rotas.patch('/cliente/:codcli', bloquearCliente)
 
 rotas.post('/pedido', digitarPedido)
 rotas.get('/pedido', listarPedidos)
